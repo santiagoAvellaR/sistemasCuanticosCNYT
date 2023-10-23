@@ -14,7 +14,6 @@
 ##### **4.5.3**
 ##### Archivo (4.5.3.jpeg)
 ![image](https://github.com/santiagoAvellaR/sistemasCuanticos/assets/143030495/1e49b1bf-500a-4e24-9c7e-1da1edb438e1)
-##### Explicación:
 ###### Autor:
 ##### La librería hace parte como un trabajo de la asignatura Ciencias Naturas y Tecnología de la Escuela Colombiana de ingeniería Julio Garavito. Profesor, Luis Daniel Benavides Navarro.
 ##### **Mi nombre es Santiago Avellaneda Rodríguez. Soy estudiante de ingeniería de cuarto semestre.**
