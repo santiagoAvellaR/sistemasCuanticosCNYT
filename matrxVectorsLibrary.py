@@ -12,7 +12,7 @@ def sumaVect(v1, v2):
         for i in range(len(v1)):
             v3[i][0]= cl.sumCmplx(v1[i][0],v2[i][0])
         return v3
-    return "los vectores no tienen misma longitud!"
+    raise Exception ("los vectores no tienen misma longitud!")
 
 # Inverso aditivo de un vector de complejos
 def invVect(v):
@@ -51,7 +51,17 @@ def sumMtrx(m1, m2):
             for l in range(len(m1[0])):
                 m3[k][l] = cl.sumCmplx(m1[k][l],m2[k][l])
         return m3
-    return "las matrices no tienen las mismas dimensiones!"
+    raise Exception("las matrices no tienen las mismas dimensiones!")
+
+# Diferencia de matrices complejas
+def difMtrx(m1, m2):
+    if len(m1) == len(m2) and len(m1[0]) == len(m2[0]):
+        m3 = [[0 for i in range(len(m1[0]))] for j in range(len(m1))]
+        for k in range(len(m1)):
+            for l in range(len(m1[0])):
+                m3[k][l] = cl.restCmplx(m1[k][l], m2[k][l])
+        return m3
+    raise Exception("las matrices no tienen las mismas dimensiones!")
 
 # Inversa aditiva de una matriz compleja
 def invMtrx(m):
@@ -65,6 +75,12 @@ def multEscMtrx(esc, mtrx):
     for i in range(len(mtrx)):
         for j in range(len(mtrx[0])):
             mtrx[i][j] = cl.multEscCmplx(esc, mtrx[i][j])
+    return mtrx
+
+def multEscCmplxMtrx(esc, mtrx):
+    for i in range(len(mtrx)):
+        for j in range(len(mtrx[0])):
+            mtrx[i][j] = cl.multiCmplx(esc, mtrx[i][j])
     return mtrx
 
 # Transpuesta de una matriz/vector
@@ -125,21 +141,16 @@ def multMtrxMtrx(m1, m2):
                 m3[a][b] = sum
         return m3
 
-def multMtrxVect(m1, v1):
-    if len(m1[0]) == len(v1):
-        m3 = [[(0,0)] for v in range(len(v1))]
-        sum = (0,0)
-        for a in range(len(m1)):
-            for b in range(len(v1[0])):
-                sum = (0, 0)
-                for c in range(len(v1)):
-                    add = cl.multiCmplx(m1[a][c], v1[c][b])
-                    sum = cl.sumCmplx(sum, add)
-                m3[a][b] = sum
-        return m3
-
 def accMtrxVect(m, v):
-    return multMtrxVect(m, v)
+    if len(m[0]) == len(v):
+        vr = [[(0, 0)] for u in range(len(v))]
+        for i in range(len(m)):
+            suma = (0, 0)
+            for j in range(len(v)):
+                suma = cl.sumCmplx(suma, cl.multiCmplx(m[i][j], v[j][0]))
+            vr[i][0] = suma
+        return vr
+    raise Exception("La longitud no es compatible")
 
 def trazaMtrx(m):
     traza = 0
@@ -191,6 +202,7 @@ def checkUnitary(m1):
             if i==j:
                 ident[i][j] = (1,0)
     return multMtrxMtrx(m1, adjMtrx(m1)) == ident
+
 def prodctTensorMtrx(m1, m2):
     m3 = [[(0,0) for u in range(len(m1[0]) * len(m2[0]))] for v in range(len(m1) * len(m2))]
     for j in range(len(m3)):

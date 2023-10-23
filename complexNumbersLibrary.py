@@ -6,7 +6,7 @@ def restCmplx(c1, c2):
     return (round(c1[0] - c2[0],2), round(c1[1] - c2[1],2))
 
 def multiCmplx(c1, c2):
-    return (round(c1[0]*c2[0] - c1[1]*c2[1],2), round(c1[1]*c2[0] + c1[0]*c2[1],2))
+    return (round((c1[0]*c2[0]) - (c1[1]*c2[1]), 2), round((c1[1]*c2[0]) + (c1[0]*c2[1]), 2))
 
 def divCmplx(c1, c2):
     deno = round(pow(c1[1], 2) + pow(c2[1], 2),2)
